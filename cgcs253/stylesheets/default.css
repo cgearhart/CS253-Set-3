@@ -1,0 +1,85 @@
+html,body {
+	font-family: arial, helvetica, sans-serif;
+	font-size: 90%;
+	color: black;
+	margin:0px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 600px;
+	height:100%;
+	background-color: #ddfddd;
+}
+
+div#content {
+    background-color: #ffe;
+    border-width: 0 1px;
+    border-style: solid;
+    border-color: #aaa;
+    height:auto;
+    height:100%;
+    min-height:100%;
+}
+
+.leftlink {
+    float: left;
+    margin-left: 10px;
+}
+
+.rightlink {
+    float: right;
+    margin-right: 10px;
+}
+
+.post {
+    display: block;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.error {
+    text-align:center;
+    color:red;
+}
+
+/* By the way, this is a comment */
+
+p {
+	line-height: 1.5em;
+}
+
+h1 {
+	font-size: 3em;
+	margin: 0;
+	margin-left:10px;
+	margin-right:10px;
+	margin-bottom: 0.2em;
+	padding: 0.25em;
+	text-align: center;
+	letter-spacing: 0.5em;
+	border-bottom-style: solid;
+	border-bottom-width: 0.3em;
+	border-bottom-color: #c00;
+}
+
+h3 {
+	color: #999;
+	font-size: 1.25em;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+input[type=text] {
+    width: 100%;   
+}
+
+textarea {
+    width: 100%;
+    min-width:250px;
+    height:100px;
+    resize:none;
+}

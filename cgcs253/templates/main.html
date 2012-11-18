@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Psych!</title>
+        <link rel="stylesheet" type="text/css" href="../stylesheets/default.css">
+    </head>
+    
+    <body>
+        <div id="content">
+    
+        <h1>Fake Blog</h1>
+        
+        <div class="leftlink"><a href="/blog">{{linkBack}}</a></div>
+        <div class="rightlink"><a href="/blog/newpost">Add New Post</a></div><br>
+        
+    
+        <div class="post">
+            {% for post in posts %}
+            <hr>
+                <h3>
+                    <div class="post-subject">
+                        <a href="/blog/{{post.key().id()}}">{{post.subject}}</a>
+                    </div>
+                </h3>
+                
+                <p>
+                    <div class="post-body">{{post.content}}</div>
+                </p>
+            {% endfor %}
+        </div>
+        
+        </div>
+    </body>
+</html>
