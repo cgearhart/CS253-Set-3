@@ -19,11 +19,29 @@ import webapp2
 import jinja2
 
 from google.appengine.ext import db
+from datetime import tzinfo, timedelta, datetime
 
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates') # __file__ is *this* file
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
                                autoescape = True)
+
+
+class FixedOffset(tzinfo):
+    """Fixed offset in minutes east from UTC."""
+    
+    def __init__(self, offset, name):
+        self.__offset = timedelta(hours = offset)
+        self.__name = name
+    
+    def utcoffset(self, dt):
+        return self.__offset
+    
+    def tzname(self, dt):
+        return self.__name
+    
+    def dst(self, dt):
+        return ZERO
 
 
 class BaseRedirect(webapp2.RequestHandler):
@@ -49,6 +67,8 @@ class Handler(webapp2.RequestHandler):
 
 class MainPage(Handler):
     """Basic landing page"""
+    eastern_tz = FixedOffset(-5,"eastern")
+    
     def get(self):
         posts_from_db = db.GqlQuery("SELECT * FROM BlogPosts ORDER BY created   DESC")
         self.render("main.html",posts=posts_from_db,linkBack="")
@@ -80,9 +100,14 @@ class NewPost(Handler):
 
 class Permalink(Handler):
     def get(self,id):
-        self.render("main.html",
-                    posts=[BlogPosts.get_by_id(int(id))],
-                    linkBack="Home")
+        key = db.Key.from_path('BlogPosts', int(id))
+        bp = db.get(key)
+        
+        if not bp:
+            self.redirect('/404')
+            return
+                
+        self.render("main.html",posts=[bp],linkBack="Home")
 
 
 class BlogPosts(db.Model):
