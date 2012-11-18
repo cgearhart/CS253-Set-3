@@ -8,27 +8,34 @@
     <body>
         <div id="content">
     
-        <h1>Fake Blog</h1>
-        
-        <div class="leftlink"><a href="/blog">{{linkBack}}</a></div>
-        <div class="rightlink"><a href="/blog/newpost">Add New Post</a></div><br>
-        
-    
-        <div class="post">
+            <h1>Fake Blog</h1>
+
+            <div class="row">
+                <div class="leftalign"><a href="/blog">{{linkBack}}</a></div>
+                <div class="rightalign"><a href="/blog/newpost">Add New Post</a></div>
+            </div><br>
+
             {% for post in posts %}
-            <hr>
-                <h3>
-                    <div class="post-subject">
-                        <a href="/blog/{{post.key().id()}}">{{post.subject}}</a>
+                <div class="post">
+
+                    <div class="headline">
+                                        
+                        <div class="leftalign">
+                            <h3><a href="/blog/{{post.key().id()}}">{{post.subject}}</a></h3>
+                        </div>
+                        
+                        <div class="rightalign">
+                            <span class="date">{{post.created.strftime('%m/%d/%y %I:%M %p')}}</span>
+                        </div>
+                        
+                        <br>
+                        
                     </div>
-                </h3>
-                
-                <p>
-                    <div class="post-body">{{post.content}}</div>
-                </p>
-            {% endfor %}
-        </div>
-        
+
+                    <p>{{post.content}}</p>
+                    
+                </div>
+            {% endfor %}        
         </div>
     </body>
 </html>
